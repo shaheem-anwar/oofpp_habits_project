@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Longest Streaks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Display the longest streak among all the habits -->
+    <div class="container">
+        <h1>Longest Streaks</h1>
+        <p class="subtitle">Among all Habits</p>
+        <div class="menu-card">
+            {% if longest_streaks %}
+                {% for h in habits %}
+                    {% if h.name == longest_streaks[0][1] and h.periodicity == "daily" %}
+                        <p> The longest streak is <b><span style="color: rgba(212, 255, 0, 0.799);">{{ longest_streaks[0][0] }}</span></b> days for the habit <b><span style="color: rgba(212, 255, 0, 0.799);">{{ h.name }}</span></b> </p>
+                    {% endif %}
+                    {%if h.name == longest_streaks[0][1] and h.periodicity == "weekly" %}
+                        <p> The longest streak is <b><span style="color: rgba(212, 255, 0, 0.799);">{{ longest_streaks[0][0] }}</span></b> weeks for the habit <b><span style="color: rgba(212, 255, 0, 0.799);">{{ h.name }}</span></b> </p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <a href = "{{url_for("main")}}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>

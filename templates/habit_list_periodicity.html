@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Habits by Periodicity</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    
+</head>
+<body>
+    <div class="container">
+        <h1>Habits by Periodicity</h1>
+        <div class="menu-card">
+            
+            <!-- Takes the input as "daily" or "weekly" and send it to the habit_by_periodicity route -->
+            <form method="POST">
+                <label for="periodicity">Periodicity:</label>
+
+                <select id="periodicity" name="periodicity">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                </select>
+
+                <button type="submit">Show Habits</button>
+            </form>
+
+            <!-- Displays all the habits from the selected periodicity -->
+            <br>
+            {% for h in filtered %}
+                <li>{{ h }}</li>
+            {% endfor %}
+        </div>        
+    <!-- Navigation button which takes back to the Dashboard -->
+    <a href = "{{url_for("main")}}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>

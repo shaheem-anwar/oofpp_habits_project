@@ -1,0 +1,143 @@
+/* Overall page layout and the background */
+body {
+    font-family: Arial, Monserrat;
+    
+
+    min-height: 100vh;
+
+    color: white;
+
+    background-image:
+        linear-gradient(
+        rgba(10,10,30,0.35),
+        rgba(10,10,30,0.45)
+        ),
+        url("/static/images/background.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    
+}
+
+/* The container of the main content */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px;
+    background: rgba(57, 40, 116, 0.441);
+    text-shadow: 1px 1px 0 rgb(25, 24, 24);
+    border: 5px solid rgb(223, 215, 215);
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.15),
+        0 0 35px rgba(168,85,247,0.25);
+    border-radius: 7px;
+}
+
+/* Headings of the page and the subtitle */
+h1 {
+    text-align: center;
+    color: rgb(251, 240, 240);
+    text-shadow: 1px 1px 0 rgb(25, 24, 24);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font: 1em sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 rgb(25, 24, 24);
+    margin-bottom: 30px;
+}
+
+/* Menu cards grid layout and design */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* Card style for the menu links and buttons */
+.menu-card {
+    display: block;
+    background: #c8b6f678;
+    padding: 26px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    color: #e9e5d1;
+    border: 3px solid #e5e7eb;
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.15),
+        0 0 35px rgba(168,85,247,0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Style of all the lists */
+.list {
+    padding-left: 0;
+}
+.list li {
+    list-style-position: inside;
+    background: rgba(0, 132, 255, 0.304);
+    border: 1px solid #341b1b;
+    stroke-width: 5px;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+.list2 {
+    padding-left: 0;
+}
+.list2 li {
+    list-style-position: inside;
+    background: rgba(160, 44, 44, 0.436);
+    border: 1px solid #341b1b;
+    stroke-width: 5px;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+/* Alligning the buttons to the Center */
+.center_align {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+.center_align a {
+    display: inline-block;
+    width: auto;
+}
+
+/* highlight box for the results of the streaks */
+.streak-box {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 2px solid black;
+    padding: 12px;
+    border-radius: 8px;
+    display: inline-block;
+}

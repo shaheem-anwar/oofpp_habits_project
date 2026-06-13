@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Most Struggled Habit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Displays the most struggled habit from all the habits -->
+    <div class="container">
+        <h1>This habit needs lots of improvements </h1>
+        <p style="text-align: center;"> The most struggled habit is <b><span style="color: rgba(212, 255, 0, 0.799);">{{struggled[1]}}</span></b> with <b><span style="color: rgba(212, 255, 0, 0.799);">{{struggled[0]}}</span></b> gaps</p>
+        <!-- Navigation button which takes back to the Dashboard -->
+        <a href = "{{url_for("main")}}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>
+
+
+        

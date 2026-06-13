@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Habit Tracker Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Mark Your Habits</h1>
+        <p>Select from the list below</p>
+        <div class="menu-card">
+            {% if habits %}
+                <ol class="list">
+                    <!-- Displays all the habits as lists -->
+                    {% for h in habits %}
+                        <li>
+                        <!-- Takes input as habit name and sends it to the mark_habit -->
+                        <form method="POST" action="{{ url_for('mark_habit') }}">
+                        <input type="hidden" name="habit_name" value="{{ h.name }}">
+                        <button type="submit">{{ h.name }}</button>
+                        </form> 
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No habits found.</p>
+            {% endif %}
+                
+            <!-- Navigation button which takes back to the Dashboard -->
+            <br>
+            <a href = "{{url_for("main")}}" class="menu-card">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

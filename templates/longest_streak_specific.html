@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Longest Streaks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Show the longest streak of a specific habit -->
+    <div class="container">
+        <h1>Longest Streaks </h1>
+        <p class="subtitle">Specific Habit</p>
+        <div class="menu-card">
+            {% if habits %}
+            <form method="POST" action="{{ url_for('longest_streak_by_habit') }}">
+                <label for="longest_streak_specific">Habits:</label>
+
+                <select id="habit_name" name="habit_name">
+                    {%for h in habits%}
+                    <option value="{{ h.name }}" {% if h.name == name %}selected{% endif %}>
+                    {{ h.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Select</button>
+            
+            </form>
+            {% endif %} 
+            <br>
+            <div class="streak-box">
+            {%if longest_streak_by_habit is not none%}
+                {{longest_streak_by_habit}}
+            {% endif %}
+            </div>
+        </div>
+    <!-- Navigation button which takes back to the Dashboard -->
+    <a href = "{{url_for("main")}}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>
+
+            
+                    
+        

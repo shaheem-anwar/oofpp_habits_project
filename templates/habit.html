@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Dashboard options for all habit tracker actions -->
+    <div class="container">
+        <h1>Habit Tracker Dashboard</h1>
+        <p class="subtitle" style="color: #86f0d2;">"Habits can change our life" </p>
+        <div class="menu-grid">
+            <a href="{{ url_for('add_new_habit') }}" class="menu-card">Add a new habit</a>
+            <a href="{{url_for('mark_habit')}}" class="menu-card">Mark a habit as complete</a>
+            <a href="{{ url_for('delete_habit') }}" class="menu-card">Delete a habit</a>
+            <a href="{{ url_for('view_all_habits') }}" class="menu-card">View all habits</a>
+            <a href="{{ url_for('habit_by_periodicity') }}" class="menu-card">View habits by periodicity</a>
+            <a href="{{ url_for('longest_streak_all_ui')}}" class="menu-card">View longest streaks among all habits</a>
+            <a href="{{ url_for('longest_streak_by_habit') }}" class="menu-card">View longest streak of a specific habit</a>
+            <a href="{{url_for('most_struggled')}}" class="menu-card">View most struggled habit</a>
+            <div class = "center_align">
+                <a href="{{url_for('exit')}}" class="menu-card">9. Exit</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

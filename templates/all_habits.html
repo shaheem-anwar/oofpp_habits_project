@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Habits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>All Habits</h1>
+
+        <!-- Display all saved habits  -->
+        <div class="menu-card">
+            {% if all_habits %}
+                <ul class="list2">
+                    {% for habit in all_habits %}
+                        <li>{{ habit }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No habits found.</p>    <!-- Message if no habits found -->
+            {% endif %}
+        </div>
+         <!-- Navigation button which takes back to the Dashboard -->
+        <br>
+        <a href="{{ url_for('main') }}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>

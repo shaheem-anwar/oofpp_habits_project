@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delete Habit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Your Habits</h1>
+        <p>Select a habit to delete</p>
+
+         <!-- Display all the live habits as options to be deleted -->
+        <div class="menu-card">
+            {% if habits %}
+                <ol class="list">
+                    {% for h in habits %}
+                        <li>
+                             <!-- Takes input from the user and sends to the delete_habit route -->
+                            <form method="POST" action="{{ url_for('delete_habit') }}">
+                                <input type="hidden" name="habit_name" value="{{ h.name }}">
+                                <button type="submit">{{ h.name }}</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No habits found.</p>
+            {% endif %}
+        </div>
+        <br>
+        <!-- Navigation button which takes back to the Dashboard -->
+        <a href="{{ url_for('main') }}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Habit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Adds the new habit by taking the input from the user -->
+    <div class="container">
+        <h1>Add a New Habit</h1>
+        <p class="subtitle">Enter the habit details below</p>
+        
+        <!-- Uses POST method to take the input from the user to make new habit objects -->
+        <form method="POST" class="menu-card">
+            <label for="habit_name">Habit Name</label>
+            <input type="text" id="habit_name" name="habit_name" placeholder="Enter habit name" required>
+
+            <label for="periodicity">Periodicity</label>
+            <select id="periodicity" name="periodicity" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+
+            <button type="submit">Add Habit</button>
+        </form>
+
+        <!-- Navigation button which takes back to the Dashboard -->
+        <br>
+        <a href="{{ url_for('main') }}" class="menu-card">Back to Dashboard</a>
+    </div>
+</body>
+</html>
