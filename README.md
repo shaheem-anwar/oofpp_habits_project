@@ -16,7 +16,7 @@ Other dependencies like json and datetime comes under standard python library.
 
 1. Clone the repository:
 
-git clone https://github.com/shaheem-anwar/oofpp_habits_project
+git clone https://github.com/shaheem-anwar/oofpp_habits_project.git
 
 
 2. Go into the project folder:
