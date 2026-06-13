@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import habits
 from storage import load_habits, save_habits
 from analytics import all_habits_list, longest_streak, longest_streak_all, most_struggled_habit, habits_list
 from habits import Habit
@@ -18,22 +17,25 @@ The HTML displayed are stored in the templates folder.
 the @app.route() is a decorator in Flask that links a URL to a function.
 Whenever a user clicks on a link or form submission, the corresponding function is executed linked to that URL."""
 
-@app.route("/")   # This is route for the Dashboard of the Habit Tracker application. 
-def main():                 
+
+@app.route("/")  
+def main():     
+    """This is route for the Dashboard of the Habit Tracker application"""            
     return render_template("habit.html")      
 
-@app.route("/view_all_habits")   # This is the route for viewing all the habits
+@app.route("/view_all_habits")   
 def view_all_habits():
+    """This is the route for viewing all the habits"""
     habits = load_habits()
     all_habits = all_habits_list(habits)
     return render_template("all_habits.html", all_habits=all_habits)
 
 
-@app.route("/add_new_habit" , methods = ["GET", "POST"])   # This is the route for adding a new habit 
+@app.route("/add_new_habit" , methods = ["GET", "POST"])   
 def add_new_habit():
-
-    #Takes the input from the user for the habit name and periodicity 
-    #and creates habit object and saves it to the storage
+    """This is the route for adding a new habit.
+    Takes the input from the user for the habit name and periodicity 
+    and creates habit object and saves it to the storage"""
     if request.method == "POST":
         name = request.form.get("habit_name")
         periodicity = request.form.get("periodicity")
@@ -43,8 +45,9 @@ def add_new_habit():
         save_habits(habits)
     return render_template("new_habit.html")
 
-@app.route("/mark_habit", methods = ["GET", "POST"])    # This is the route for marking a habit as complete. 
+@app.route("/mark_habit", methods = ["GET", "POST"])     
 def mark_habit():
+    """This is the route for marking a habit as complete."""
     habits = load_habits()
     # takes the name of the habit from the user and marks it as completed 
     if request.method == "POST":
@@ -55,9 +58,10 @@ def mark_habit():
         save_habits(habits) #Then it saves the updated habit data
     return render_template("habit_complete.html", habits=habits)
 
-@app.route("/delete_habit" , methods = ["GET", "POST"])  # This is the route for deleting habits
+@app.route("/delete_habit" , methods = ["GET", "POST"])  
 
 def delete_habit():
+    """This is the route for deleting habits"""
     habits = load_habits()
     #takes input as the name of the habit and then deletes the habit object from the JSON file
     if request.method == "POST":
@@ -68,8 +72,9 @@ def delete_habit():
         save_habits(habits)
     return render_template("delete.html", habits = habits)
 
-@app.route("/habit_by_periodicity", methods = ["GET", "POST"]) # This is the route for viewing habits by periodicity
+@app.route("/habit_by_periodicity", methods = ["GET", "POST"]) 
 def habit_by_periodicity():
+    """This is the route for viewing habits by periodicity"""
     habits = load_habits()
     sel = []
     filtered = []
@@ -78,15 +83,17 @@ def habit_by_periodicity():
         filtered = habits_list(habits, sel)
     return render_template("habit_list_periodicity.html", habits=habits, filtered= filtered)
 
-@app.route("/longest_streak_all") # This is the route for viewing longest streaks among all habits
+@app.route("/longest_streak_all") 
 def longest_streak_all_ui():
+    """This is the route for viewing longest streaks among all habits"""
     habits = load_habits()
     longest_streaks = longest_streak_all(habits)
     return render_template("longest_streak_all.html", longest_streaks=longest_streaks, habits=habits)
 
-@app.route("/longest_streak_by_habit", methods=["GET", "POST"]) # This is the route for viewing longest streak from a given habit
+@app.route("/longest_streak_by_habit", methods=["GET", "POST"]) 
 
 def longest_streak_by_habit():
+    """This is the route for viewing longest streak from a given habit"""
     habits = load_habits()
     longest_streak_by_habit = None
     name = None
@@ -97,19 +104,20 @@ def longest_streak_by_habit():
     return render_template(
         "longest_streak_specific.html",habits=habits, longest_streak_by_habit=longest_streak_by_habit, name= name )
 
-@app.route("/most_struggles_habit") # This is the route for viewing the most struggled habit among all the habits
+@app.route("/most_struggles_habit") 
 
 def most_struggled():
+    """This is the route for viewing the most struggled habit among all the habits"""
     habits = load_habits()
     struggled = most_struggled_habit(habits)
         
     return render_template("most_struggled.html", struggled = struggled)
 
 
-# This is the route for exiting the application. It displays a greeting message set on the time of the day.
+
 @app.route("/exit")
 def exit():
-
+    """This is the route for exiting the application. It displays a greeting message based on the time of the day."""
     now = datetime.now().hour
 
     message = "Get back soon and don't break your streaks!"
