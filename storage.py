@@ -2,8 +2,9 @@ from habits import Habit
 from datetime import datetime
 import json
 
-#save habits to habits.json file
+
 def save_habits(habits):
+    """save habits to habits.json file"""
     data=[]
 
     #convert habit objects to dictionaries for JSON storage
