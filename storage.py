@@ -2,6 +2,9 @@ from habits import Habit
 from datetime import datetime
 import json
 
+""" This is the Persistence Layer - It is the storage layer of the app 
+which make sure that the habit data (habit objects) are stored and its 
+retrieval after the application restarts."""
 
 def save_habits(habits):
     """save habits to habits.json file"""
@@ -25,7 +28,7 @@ def save_habits(habits):
     with open("habits.json", "w") as f:  #opening the JSON file in write mode
         json.dump(data, f,indent = 4)    # saving the data to the JSON file
 
-#load habits from a habits.json file
+"""load habits from a habits.json file"""
 def load_habits():
     habits = []
     #Read the Json file and convert dictionaries back to Habit objects
