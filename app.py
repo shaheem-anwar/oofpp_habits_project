@@ -6,17 +6,17 @@ from habits import Habit
 from datetime import datetime
 
 
-#This is the UI part of the application. The Flask is the selected framework for the UI. 
-#The Falsk is a lightweight web framework that allows to create web applications 
-#It provides an easy way to handle routing, templates, and UI.
+"""This is the UI part of the application. The Flask is the selected framework for the UI. 
+The Falsk is a lightweight web framework that allows to create web applications
+ It provides an easy way to handle routing, templates, and UI."""
 
 app = Flask(__name__)    # Creation of the Flask application instance
 
-#The main logic of the app.py is to define routes for different functions of the application
-#and rendering (or displaying) the HTML templates for the defined routes. 
-#The HTML displayed are stored in the templates folder.
-#the @app.route() is a decorator in Flask that links a URL to a function.
-#Whenever a user clicks on a link or form submission, the corresponding function is executed linked to that URL.
+"""The main logic of the app.py is to define routes for different functions of the application
+and rendering (or displaying) the HTML templates for the defined routes. 
+The HTML displayed are stored in the templates folder.
+the @app.route() is a decorator in Flask that links a URL to a function.
+Whenever a user clicks on a link or form submission, the corresponding function is executed linked to that URL."""
 
 @app.route("/")   # This is route for the Dashboard of the Habit Tracker application. 
 def main():                 

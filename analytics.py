@@ -3,9 +3,15 @@ from datetime import timedelta
 from storage import save_habits, load_habits
 
 
-#defining the function for the most streak for a given habit
-def longest_streak(habits, name):
+""" This module uses Functional Programming - It is a type of programming paradigm in which 
+the program is built using the functions which returns results
+after processing some data. The habit tracker app takes input as habit data, 
+calculate streaks/ statistics and
+return results"""
 
+
+def longest_streak(habits, name):
+    """defining the function for the most streak for a given habit"""
     # if no habits are there then return 0
     if not habits:
         return 0
@@ -51,8 +57,9 @@ def longest_streak(habits, name):
     return 0  
 
 
-#defining the longest streak from all the given habits
+
 def longest_streak_all(habits):
+    """defining the longest streak from all the given habits"""
     longest_streak_list = []   #initializing the longest streak list
 
     #iterating through each habit object from the list of habits
@@ -68,25 +75,30 @@ def longest_streak_all(habits):
     longest_list = sorted(longest_streak_list,reverse=True)   # sorting it to get the longest streak among all the habits
     return longest_list
 
-#Function for getting habits list
+
 def all_habits_list(habits):
-    # The logic is just to iterate through all the habits objects and appending its name to the list
+    """Function for getting habits list.
+    The logic is just to iterate through all the habits objects and appending its name to the list"""
     active_habits = []
     for h in habits:
         active_habits.append(h.name)
     return active_habits
 
-#Function for habits list for the selected periodicity 
+
 def habits_list(habits,periodicity):
-    #The logic is to iterate through all the habits objects based on the condition of periodicity and appending h.name to the list
+    """Function for habits list for the selected periodicity
+    The logic is to iterate through all the habits objects based on the condition 
+    of periodicity and appending h.name to the list"""
     habits_lists = []
     for h in habits:
         if h.periodicity==periodicity:
             habits_lists.append(h.name)
     return habits_lists
 
-#function to identify the most struggled habit 
+ 
 def most_struggled_habit(habits):
+    """function to identify the most struggled habit"""
+    
     # Handling error case when no habits are present
     if not habits:
         return 0, None
