@@ -1,7 +1,7 @@
 ﻿#importing necessary modules and classes
 from datetime import timedelta
 from storage import save_habits, load_habits
-
+import functools
 
 """ This module uses Functional Programming - It is a type of programming paradigm in which 
 the program is built using the functions which returns results
@@ -9,93 +9,75 @@ after processing some data. The habit tracker app takes input as habit data,
 calculate streaks/ statistics and
 return results"""
 
-
 def longest_streak(habits, name):
     """defining the function for the most streak for a given habit"""
-    # if no habits are there then return 0
-    if not habits:
+
+    # Find the habit from the name provided
+    # next() returns the first matching habit from the given name.
+    # If habit is not found returns None.
+    habit = next((h for h in habits if h.name == name), None)
+
+    # If habits markings (Checks) are not there then it returns 0
+    if not habit or not habit.checks:
         return 0
-    
-    #iterating through every habit object
-    for h in habits:
-        if h.name == name:      # if statement condition - if the habit name matches the given name
-            if not h.checks:    # if no records then return 0
-                return 0
-            curr_streak = 1     #Intitializing the curr_streak variable
-            max_streak = 1      #Intitializing the max_streak variable
 
-            #if the periodicity is not daily or weekly, return 0 - crash handling
-            if h.periodicity not in ("daily", "weekly"):
-                return 0
+    # creating a list of dates from checks
+    #removing the time element from dattime object to extract only the dates    
+    period_list = sorted(map(lambda c: c.date(), habit.checks))
 
-            period_list = []
-            # creating a list of dates from checks
-            for c in h.checks:
-                period_list.append(c.date())   #removing the time element from dattime object to extract only the dates
-            period_list = sorted(period_list) 
+    curr_streak = 1     #Intitializing the curr_streak variable
+    max_streak = 1      #Intitializing the max_streak variable
 
-            #iteration through the dates list to calculate the longest streak
-            for i in range(len(period_list) - 1):
-                current_period = period_list[i]
-                next_period = period_list[i + 1]
+    #iteration through the dates list to calculate the longest streak
+    for i in range(len(period_list) - 1):
+        current_period = period_list[i]
+        next_period = period_list[i + 1]
                 
-                #Longest streak logic for daily habits
-                if h.periodicity == "daily":
-                    if (next_period - current_period).days == 1:
-                        curr_streak += 1
-                    else:
-                        curr_streak = 1
+        #Longest streak logic for daily habits
+        if habit.periodicity == "daily":
+            if (next_period - current_period).days == 1:
+                curr_streak += 1
+            else:
+                curr_streak = 1
 
-                # Longest streak logic for weekly habits
-                elif h.periodicity == "weekly":
-                    if 7<=(next_period - current_period).days <14: # if difference is between 7 and 14 days, then it can be said that the habit was completed for the next week 
-                        curr_streak += 1
-                    else:
-                        curr_streak = 1
-                max_streak = max(curr_streak, max_streak)
-            return max_streak    # return the longest streak 
-    return 0  
-
+        # Longest streak logic for weekly habits
+        elif habit.periodicity == "weekly":
+            if 7<=(next_period - current_period).days <14: # if difference is between 7 and 14 days, then it can be said that the habit was completed for the next week 
+                curr_streak += 1
+            else:
+                curr_streak = 1
+        max_streak = max(curr_streak, max_streak)
+    return max_streak    # return the longest streak 
 
 
 def longest_streak_all(habits):
     """defining the longest streak from all the given habits"""
-    longest_streak_list = []   #initializing the longest streak list
 
-    #iterating through each habit object from the list of habits
-    for h in habits:
-        if not h.checks:    #if there are no records in the checks, skip to the next habit
-            continue
-        #appending the longest streak with the habit name to the longest_streak_list as a tuple
-        longest_streak_list.append((longest_streak(habits,h.name), h.name)) 
+    longest_streak_list = list(
+        map(lambda h: (longest_streak(habits, h.name), h.name),   # map() creates a tuple which returns- (longest streak (in numbers), habit name)
+            filter(lambda h: h.checks, habits)))                 # The filter() filter out the habits withoit checks
+    longest_streak_list = sorted(longest_streak_list, reverse = True) # sorting it to get the longest streak among all the habits in the first index
     
-    # if no habits found, return an empty list - error handling
-    if not longest_streak_list:
-        return []
-    longest_list = sorted(longest_streak_list,reverse=True)   # sorting it to get the longest streak among all the habits
-    return longest_list
-
+    return longest_streak_list
 
 def all_habits_list(habits):
     """Function for getting habits list.
     The logic is just to iterate through all the habits objects and appending its name to the list"""
-    active_habits = []
-    for h in habits:
-        active_habits.append(h.name)
-    return active_habits
 
+    active_habits = [h.name for h in habits]  #it iterates over all the habits data list and
+                                                #returns a list of habit names
+
+    return active_habits
 
 def habits_list(habits,periodicity):
     """Function for habits list for the selected periodicity
     The logic is to iterate through all the habits objects based on the condition 
     of periodicity and appending h.name to the list"""
-    habits_lists = []
-    for h in habits:
-        if h.periodicity==periodicity:
-            habits_lists.append(h.name)
+
+    #here lambda function 
+    habits_lists = [h.name for h in filter(lambda h: h.periodicity == periodicity, habits)]
     return habits_lists
 
- 
 def most_struggled_habit(habits):
     """function to identify the most struggled habit"""
     
@@ -108,18 +90,13 @@ def most_struggled_habit(habits):
     for h in habits:        #Iterating through every habit object 
         if not h.checks:    #error handling and skipping this iteration if "checks" is empty
             continue
-        # Initializing variables and lists
-        curr_struggle = 0
-        max_struggle = 0
-        check_list = []
 
-        #Converting the checks from datetime to date
-        for c in h.checks:
-            check_list.append(c.date())
-        check = sorted(check_list)    #sorting it to get the dates in order
+        max_struggle = 0
+
+        check = sorted(map(lambda c: c.date(), h.checks))  #Converting the checks from datetime to date and sorting it to get the dates in order
 
         #Iterating through the dates list for longest streak calculation
-        for i in range (0, len(check)-1):
+        for i in range(0, len(check)-1):
             #Here the main logic is to find the difference between the current 
             #date and the next date, if the difference is more than 1 day for daily habits
             #or more than 7 days for weekly habits, then it can be concluded that the habit
@@ -129,26 +106,24 @@ def most_struggled_habit(habits):
 
             #Logic for daily habit's most struggled habit calculation
             if h.periodicity == "daily":
-                if (next_period - current_period).days == 1:
-                    curr_struggle = 0
-                else:
-                    curr_struggle = ((next_period - current_period).days - 1) 
+                curr_struggle = 0 if (next_period - current_period).days == 1 else (next_period - current_period).days - 1
             
             #Logic for weekly habit's most struggled habit calculation
             elif h.periodicity == "weekly":
-                if 7 <= (next_period - current_period).days < 14: # if difference is between 7 and 14 days, then it can be said that the habit was struggled for 1 week
-                    curr_struggle = 0
-                else:
-                    curr_struggle = ((next_period - current_period).days-1) // 7  #division by 7 to convert the days into weeks 
+                # if difference is between 7 and 14 days, there is no struggle
+                # the range of days (7-14 days) are given as a weekly habit can be completed at any time within a week
+                # if difference exceeds 14 days, division by 7 converts the missed days into weeks
+                curr_struggle = 0 if (next_period - current_period).days < 14 else ((next_period - current_period).days - 1) // 7
 
-            max_struggle = max(max_struggle,curr_struggle)   # getting max struggle for the habit object      
-        longest_habit_list.append((max_struggle,h.name))   # The final list for most struggled habit
-                                                           # It has the max struggle number and habit name
+            max_struggle = max(max_struggle, curr_struggle)   # getting maximum struggle for the habit object      
+        longest_habit_list.append((max_struggle, h.name))   # The final list of tuples with max struggle number and habit name
 
     if not longest_habit_list:
         return 0, None
 
-    longest_sorted= sorted(longest_habit_list, reverse=True)  # Sorting to get the most struggled habit
+    longest_sorted = sorted(longest_habit_list, reverse=True)  
+    # Sorting to get the most struggled habit (if there's a tie between multiple habits, then 
+    # the most struggled habit will be the one which appears first after sorting)
     max_value = longest_sorted[0][0]         
     most_struggled = longest_sorted[0][1]
     return max_value, most_struggled    #returning the most struggled habit and the number of struggles of that habit
