@@ -75,7 +75,7 @@ def habits_list(habits,periodicity):
     The logic is to iterate through all the habits objects based on the condition 
     of periodicity and appending h.name to the list"""
 
-    #here lambda function 
+    #here lambda function is used with filter() to get habits from the given periodicity
     habits_lists = [h.name for h in filter(lambda h: h.periodicity == periodicity, habits)]
     return habits_lists
 
