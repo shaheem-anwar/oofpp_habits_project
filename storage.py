@@ -26,8 +26,9 @@ def save_habits(habits):
     with open("habits.json", "w") as f:  #opening the JSON file in write mode
         json.dump(data, f,indent = 4)    # saving the data to the JSON file
 
-"""load habits from a habits.json file"""
+
 def load_habits():
+    """load habits from a habits.json file"""
     habits = []
     #Read the Json file and convert dictionaries back to Habit objects
     try:  # try-except method to handle case where no file exists
