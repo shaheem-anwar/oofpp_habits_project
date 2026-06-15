@@ -5,8 +5,8 @@ An application backend developed in Python used for daily and weekly habit track
 ## Requirements
 
 - Python 3.12.10
-- Flask 
-- pytest 
+- Flask (library - included in the requirements.txt)
+- pytest (library - included in the requirements.txt)
 
 Other dependencies like json and datetime comes under standard python library.
 
@@ -82,6 +82,7 @@ pytest test.py
 - Viewing habits list (full list and filtered list based on periodicity)
 - Longest streak calculation for all the habits and of a specific habit
 - Most struggled habit analysis
+- All the modules are properly documented using docstring
 
 ## Predefined Data
 
