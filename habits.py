@@ -5,8 +5,9 @@ class Habit:
     application which is the core blueprint of the habit objects which
     has the following components - Attributes & Methods """
     
-    #constructor to initialize habit attributes (which is the blueprint of the habit object)
+    
     def __init__(self, name, periodicity):
+        """constructor to initialize habit attributes (which is the blueprint of the habit object)"""
         self.name = name                    # habit name
         self.periodicity = periodicity      # "daily" or "weekly" periods
         self.created_at = datetime.now()    # when habit was created
