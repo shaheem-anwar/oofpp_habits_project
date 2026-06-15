@@ -100,8 +100,8 @@ def most_struggled_habit(habits):
         for i in range(0, len(check)-1):
             #Here the main logic is to find the difference between the current 
             #date and the next date, if the difference is more than 1 day for daily habits
-            #or more than 7 days for weekly habits, then it can be concluded that the habit
-            #was struggled for the number of days between the two dates
+            #or within (7-14 days) for weekly habits, then it can be concluded that the habit
+            #was struggled for the number of days or weeks between the two dates
             current_period = check[i]
             next_period = check[i + 1]
 
