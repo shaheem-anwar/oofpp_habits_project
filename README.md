@@ -83,6 +83,7 @@ pytest test.py
 - Longest streak calculation for all the habits and of a specific habit
 - Most struggled habit analysis
 - All the modules are properly documented using docstring
+- Functional programing in the analytics.py
 
 ## Predefined Data
 
