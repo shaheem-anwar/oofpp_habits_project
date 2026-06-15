@@ -43,8 +43,8 @@ def load_habits():
                 habit.created_at = datetime.fromisoformat(i["created_at"])  # converting the created_at string to datetime object
                 habit.checks = check_list                                  # list of checks assigned to the habit object
                 habits.append(habit)     # creation of habit objects from the loaded data
-    #handle the case where the file does not exist (e.g., Running the program for the first time)
 
+    #handle the case where the file does not exist (e.g., Running the program for the first time)
     except FileNotFoundError: # if no file exists pass and return an empty list
         pass
 
