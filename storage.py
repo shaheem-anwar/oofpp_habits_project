@@ -13,9 +13,7 @@ def save_habits(habits):
     #convert habit objects to dictionaries for JSON storage
     for h in habits:
         # Converting datetime objects to list of strings since JSON does not support datetime.datetime format
-        check_list = []
-        for check in h.checks:
-             check_list.append(check.isoformat())  # appending the converted datetime string to the check_list
+        check_list = [check.isoformat() for check in h.checks]  # appending the converted datetime string to the check_list
 
         #convert habit attributes to a dictionary format suitable for JSON
         data.append({
