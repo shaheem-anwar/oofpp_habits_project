@@ -37,7 +37,8 @@ def test_no_multiple_weekly_habit_marking():
 
 def test_longest_streak():
     """test for - 3. Longest streak calculation - specific habit"""
-    habit = Habit("Exercise", "daily")
+    habit = Habit("Exercise", "daily")# Creating a habit
+    #adding checks for the habit
     habit.checks = [datetime(2026, 5, 1), datetime(2026, 5, 2), datetime(2026, 5, 3), datetime(2026, 5, 5)]
     assert longest_streak([habit], "Exercise") == 3
 
@@ -76,6 +77,8 @@ def test_longest_streak_all():
 
 def test_all_habits_list():
     """test for - 5. All habits list"""
+
+    # Creating habits for the test 
     habit1 = Habit("Exercise", "daily")
     habit2 = Habit("Read", "weekly")
     habit3 = Habit("Run", "daily")
@@ -88,6 +91,7 @@ def test_all_habits_list():
 
 def test_habit_list():
     """test for - 6. Habits list - daily or weekly"""
+    # Creating habits
     habit1 = Habit("Exercise", "daily")
     habit2 = Habit("Read", "weekly")
     habit3 = Habit("Run", "daily")
@@ -101,10 +105,11 @@ def test_habit_list():
 def test_most_struggled_habit():
     """test for - 7. Most struggled habit"""
     habit1 = Habit("Exercise", "daily")  #Creating habit for the test
+    #checking the habits as marked
     habit1.checks = [
         datetime(2026, 5, 1),
+        datetime(2026, 5, 2),
         datetime(2026, 5, 3),
-        datetime(2026, 5, 4),
     ]
 
     habit2 = Habit("Read", "weekly")
@@ -130,7 +135,7 @@ def test_most_struggled_habit():
 def test_save_load_habit():
     """test for - 8. Saving and loading habits from the storage
     Take snapshot of current habits data as to recover it after the test
-    (the test deletes all the current data) """
+    (as the test deletes all the current habits data in the habits.json) """
     habit_snapshot = load_habits()
 
     # Here try-finally blocks are used to make sure even if the assertion fails,
@@ -149,7 +154,7 @@ def test_save_load_habit():
         assert loaded_habits[0].created_at == habit_1.created_at
         assert loaded_habits[0].checks == habit_1.checks
 
-        for h in loaded_habits:
+        for h in loaded_habits:         #removing the extra added test data 
             if h.name == "Riding":
                 loaded_habits.remove(h)
 
