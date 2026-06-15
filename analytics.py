@@ -1,13 +1,16 @@
-﻿#importing necessary modules and classes
-from datetime import timedelta
-from storage import save_habits, load_habits
-import functools
+﻿
 
 """ This module uses Functional Programming - It is a type of programming paradigm in which 
 the program is built using the functions which returns results
 after processing some data. The habit tracker app takes input as habit data, 
-calculate streaks/ statistics and
-return results"""
+calculate streaks/ statistics and return results  The functional
+programming tools used here are: 
+- map() - applies function to all the items of the list
+- filter() - conditional filtering of items in a list
+- lambda - used to write one-line functions without defining it seperately
+- sorted() - sorts the lists
+- next() - returns the next matching item from an iterating object
+- max() - it is used to get highest value from the results"""
 
 def longest_streak(habits, name):
     """defining the function for the most streak for a given habit"""
