@@ -1,6 +1,4 @@
-﻿
-
-""" This module uses Functional Programming - It is a type of programming paradigm in which 
+﻿""" This module uses Functional Programming - It is a type of programming paradigm in which 
 the program is built using the functions which returns results
 after processing some data. The habit tracker app takes input as habit data, 
 calculate streaks/ statistics and return results  The functional
