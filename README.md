@@ -4,9 +4,9 @@ An application backend developed in Python used for daily and weekly habit track
 
 ## Requirements
 
-- Python 3.7+ (3.12.10)
-- Flask (`pip install flask`)
-- pytest (`pip install pytest`)
+- Python 3.12.10
+- Flask 
+- pytest 
 
 Other dependencies like json and datetime comes under standard python library.
 
@@ -50,6 +50,14 @@ terminal command - python app.py
 
 - In the terminal a link to the UI will be displayed which can be accessed by Ctrl + Clicking.
 
+## How to use the Habit Tracker App
+- Creating a new Habit - Click "Add a new habit" button and then enter the name of the habit
+and the periodicity from the drop-down option - "daily" & "weekly".
+- Marking the habit - Click the "Mark a habit as complete" button and select from the list of all live habits to check the habit.
+- Deleting habit - Click - "Delete a habit" button and select the habit from the list to be deleted.
+- "View all habit" and "View habit by periodicity" for viewing all the habits or viewing the filtered habits based on the periodicity respectively.
+- "View longest streaks among all habits", "View longest streak of a specific habit" and "View most struggled habit" for the analysis or the tracking of the habit.
+
 ## Running the Tests
 
 
@@ -65,6 +73,7 @@ pytest test.py
 - `test.py` - Unit tests
 - `habits.json` - Data storage
 - `templates/` - HTML pages for Flask UI
+- `static/` - CSS and styling files
 
 ## Features
 
@@ -76,4 +85,4 @@ pytest test.py
 
 ## Predefined Data
 
-The application comes with pre-stored example data which can be used for exploring the application. There are 5 exemplar habits stored in the `habits.json`.
+The application comes with pre-stored example data which can be used for exploring the application. There are 6 example habits stored in the `habits.json`.
