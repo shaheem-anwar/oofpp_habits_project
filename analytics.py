@@ -56,7 +56,7 @@ def longest_streak_all(habits):
 
     longest_streak_list = list(
         map(lambda h: (longest_streak(habits, h.name), h.name),   # map() creates a tuple which returns- (longest streak (in numbers), habit name)
-            filter(lambda h: h.checks, habits)))                 # The filter() filter out the habits withoit checks
+            filter(lambda h: h.checks, habits)))                 # The filter() filters out the habits without checks
     longest_streak_list = sorted(longest_streak_list, reverse = True) # sorting it to get the longest streak among all the habits in the first index
     
     return longest_streak_list
